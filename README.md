@@ -61,8 +61,12 @@ sysctl -w vm.max_map_count=262144
     - [ ] MySQL
     - [ ] sys
     - [ ] ...
+- [ ] logstash时间戳预处理，地理位置转换
+    - [x] Nginx
+    - [x] Redis
+    - [ ] ...
 - [ ] 添加`.env`文件以动态修改host
-- [ ] 修改logstash filter，ES中多余字段的删除
+- [ ] ES索引中多余字段的删除
 - [ ] **系统效率测试**
     - [ ] 日志写入效率
     - [ ] **日志查询效率**
@@ -72,5 +76,5 @@ sysctl -w vm.max_map_count=262144
 
 > P.S. 
 >
-> 1. 可通过修改`docker-elk\conf\logstash-filebeat.conf`的`input`字段的host和`filebeat\filebeat.yml`的`output`字段的host，将三个module分布到三个节点
-> 2. `\log`文件中有nginx和redis的事例log文件
+> 1. 可通过修改`docker-elk\conf\logstash-filebeat.conf`的`input`字段的host和`filebeat\filebeat.yml`的`output`字段的host，调整三个module的对应主机
+> 2. `\log`文件中有nginx和redis的事例log文件，其中`access.log`是40w级别的
