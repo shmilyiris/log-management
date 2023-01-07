@@ -1,0 +1,22 @@
+version: "3"
+services:
+  filebeat:
+    # 容器名称
+    container_name: filebeat
+    # 主机名称
+    hostname: filebeat
+    # 镜像
+    image: docker.elastic.co/beats/filebeat:7.0.1
+    # 重启机制
+    restart: always
+    user: root
+    command: filebeat -e -strict.perms=false
+    # 持久化挂载
+    volumes:
+      # 映射到容器中[作为数据源]
+      - ..\log\redis:/www/redis/log
+      - ..\log\nginx:/www/nginx/log
+      # 映射配置文件到容器中
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
+    # 使用主机网络模式
+    network_mode: host

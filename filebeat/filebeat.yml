@@ -1,0 +1,33 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /www/redis/log/redis-server.log
+  fields:
+    log_topics: redis
+    log_types: redis-server
+- type: log
+  enabled: true
+  paths:
+    - /www/nginx/log/access.log
+  fields:
+    log_topics: nginx
+    log_types: nginx-access
+- type: log
+  enabled: true
+  paths:
+    - /www/nginx/log/error.log
+  fields:
+    log_topics: nginx
+    log_types: nginx-error
+# output.logstash:
+#   hosts: ["localhost:5044"]
+output.kafka:
+  hosts: ["localhost:9092"]
+  topic: "filebeat"
+  codec.json:
+    pretty: false
+filebeat.config.modules:
+  enabled: true
+  path: ${path.config}/modules.d/*.yml
+
