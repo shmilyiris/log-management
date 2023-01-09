@@ -3,7 +3,7 @@ services:
   es-master:
     container_name: es-master
     hostname: es-master
-    image: elasticsearch:7.1.1
+    image: elasticsearch:${ELASTICSEARCH_VERSION}
     restart: always
     ports:
       # from host to docker
@@ -20,7 +20,7 @@ services:
 
   es-slave1:
     container_name: es-slave1
-    image: elasticsearch:7.1.1
+    image: elasticsearch:${ELASTICSEARCH_VERSION}
     restart: always
     ports:
       - 9201:9200
@@ -37,7 +37,7 @@ services:
   kibana:
     container_name: kibana
     hostname: kibana
-    image: kibana:7.1.1
+    image: kibana:${KIBANA_VERSION}
     restart: always
     ports:
       - 5601:5601
@@ -53,7 +53,7 @@ services:
   logstash:
     container_name: logstash
     hostname: logstash
-    image: logstash:7.1.1
+    image: logstash:${LOGSTASH_VERSION}
     command: logstash -f ./conf/logstash-filebeat.conf
     restart: always
     volumes:

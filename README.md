@@ -49,7 +49,7 @@ sysctl -w vm.max_map_count=262144
 ./install.sh	# 创建实例
 ```
 
-将默认启动两个es实例、logstash以及kibana，访问http://localhost:5601/即可进入kibana可视化界面
+将默认启动两个es实例、logstash以及kibana，访问[这个链接](http://localhost:5601/)即可进入kibana可视化界面
 
 
 
@@ -58,18 +58,15 @@ sysctl -w vm.max_map_count=262144
 - [ ] 添加日志源支持
     - [x] Nginx
     - [x] Redis
-    - [ ] MySQL
     - [ ] sys
     - [ ] ...
 - [ ] logstash时间戳预处理，地理位置转换
     - [x] Nginx
     - [x] Redis
     - [ ] ...
-- [ ] 添加`.env`文件以动态修改host
-- [ ] ES索引中多余字段的删除
-- [ ] **系统效率测试**
-    - [ ] 日志写入效率
-    - [ ] **日志查询效率**
+- [x] 添加`.env`文件以动态修改host
+- [x] ES索引中多余字段的删除
+- [ ] etcd动态配置文件（`.env`文件，日志源路径..）
 - [ ] ……
 
 

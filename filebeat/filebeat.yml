@@ -23,7 +23,7 @@ filebeat.inputs:
 # output.logstash:
 #   hosts: ["localhost:5044"]
 output.kafka:
-  hosts: ["localhost:9092"]
+  hosts: ["${KAFKA_HOST}:9092", "${KAFKA_HOST}:9093", "${KAFKA_HOST}:9094"]
   topic: "filebeat"
   codec.json:
     pretty: false
