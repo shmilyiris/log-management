@@ -12,8 +12,6 @@
 
 ## 二、部署Filebeat
 
-FileBeat支持对Nginx和Redis日志源的文件收集和基本解析，用docker-compose启动FileBeat
-
 ```bash
 # Git Bash 环境下在 /filebeat中
 ./install.sh
@@ -66,7 +64,7 @@ sysctl -w vm.max_map_count=262144
     - [ ] ...
 - [x] 添加`.env`文件以动态修改host
 - [x] ES索引中多余字段的删除
-- [ ] etcd动态配置文件（`.env`文件，日志源路径..）
+- [x] etcd动态配置文件（`.env`文件，日志源路径..）
 - [ ] ……
 
 

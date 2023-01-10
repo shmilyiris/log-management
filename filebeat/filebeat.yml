@@ -30,4 +30,9 @@ output.kafka:
 filebeat.config.modules:
   enabled: true
   path: ${path.config}/modules.d/*.yml
+filebeat.config.prospectors:
+  enabled: true
+  path: 'usr/share/filebeat/filebeat.yml'
+  reload.enabled: true
+  reload.period: 10s
 

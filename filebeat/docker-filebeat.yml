@@ -1,22 +1,42 @@
 version: "3"
 services:
   filebeat:
-    # 容器名称
     container_name: filebeat
-    # 主机名称
     hostname: filebeat
-    # 镜像
     image: docker.elastic.co/beats/filebeat:${FILEBEAT_VERSION}
-    # 重启机制
     restart: always
     user: root
     command: filebeat -e -strict.perms=false
-    # 持久化挂载
     volumes:
-      # 映射到容器中[作为数据源]
       - ..\log\redis:/www/redis/log
       - ..\log\nginx:/www/nginx/log
-      # 映射配置文件到容器中
       - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
-    # 使用主机网络模式
+    links:
+      - etcd_filebeat
+      - etcd
     network_mode: host
+  etcd:
+    image: bitnami/etcd:latest
+    container_name: etcd
+    restart: always
+    ports:
+      - 2379:2379
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_NAME=etcd
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+    links:
+      - etcd_filebeat
+      - filebeat
+  etcd_filebeat:
+    image: golang:latest
+    volumes:
+      - ./awesomeFilebeat:/go/src/examplecom/awesomeFilebeat
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
+    ports:
+      - "8000:8080"
+    command: go run /go/src/examplecom/awesomeFilebeat/main.go
+    links:
+      - filebeat
+      - etcd
